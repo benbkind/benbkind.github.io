@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Benjamin Berkoe Agyemang — Data Analyst Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:       #0e0e0e;
+    --paper:     #f5f2eb;
+    --accent:    #c0392b;
+    --accent2:   #1a5276;
+    --muted:     #6b6459;
+    --rule:      #d4cfc6;
+    --card:      #ffffff;
+    --tag-bg:    #eae7df;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  /* ─── NOISE TEXTURE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 999;
+    opacity: 0.5;
+  }
+
+  /* ─── HEADER ─── */
+  header {
+    position: relative;
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    padding: 2rem 4rem;
+    overflow: hidden;
+  }
+
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -120px; right: -80px;
+    width: 520px; height: 520px;
+    border-radius: 50%;
+    border: 80px solid var(--rule);
+    opacity: 0.35;
+    pointer-events: none;
+  }
+
+  .nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 1.5rem;
+    animation: fadeDown 0.6s ease both;
+  }
+
+  .nav-logo {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .nav-links {
+    display: flex; gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  .hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 4rem 0 2rem;
+    animation: fadeUp 0.8s 0.2s ease both;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(3rem, 7vw, 6.5rem);
+    line-height: 1.0;
+    font-weight: 400;
+    max-width: 18ch;
+    margin-bottom: 2rem;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-desc {
+    max-width: 52ch;
+    font-size: 1.05rem;
+    color: var(--muted);
+    border-left: 3px solid var(--accent);
+    padding-left: 1.2rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-tags {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--tag-bg);
+    color: var(--ink);
+    padding: 0.35rem 0.9rem;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+  }
+
+  .tag.accent { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .tag.accent2 { background: var(--accent2); color: #fff; border-color: var(--accent2); }
+
+  .hero-cta {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center; gap: 0.5rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.85rem 1.8rem;
+    border: 1.5px solid var(--ink);
+    color: var(--ink);
+    transition: all 0.2s;
+    background: transparent;
+    cursor: pointer;
+  }
+  .btn:hover { background: var(--ink); color: var(--paper); }
+  .btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .btn.primary:hover { background: #a93226; border-color: #a93226; }
+
+  .hero-scroll {
+    align-self: end;
+    display: flex;
+    align-items: center; gap: 0.75rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    animation: fadeUp 1s 0.6s ease both;
+  }
+
+  .scroll-line {
+    width: 48px; height: 1px;
+    background: var(--rule);
+  }
+
+  /* ─── SECTIONS ─── */
+  section { padding: 5rem 4rem; }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center; gap: 1rem;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1; height: 1px;
+    background: var(--rule);
+  }
+
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400;
+    line-height: 1.15;
+    margin-bottom: 3rem;
+  }
+
+  /* ─── STATS STRIP ─── */
+  .stats-strip {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 3rem 4rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    position: relative;
+  }
+
+  .stats-strip::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(to right, var(--accent), var(--accent2));
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding-right: 2rem;
+    border-right: 1px solid rgba(255,255,255,0.1);
+  }
+  .stat:last-child { border-right: none; }
+
+  .stat-number {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.8rem;
+    line-height: 1;
+    color: #fff;
+  }
+
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* ─── ABOUT ─── */
+  #about { background: var(--paper); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    margin-bottom: 1rem;
+    color: var(--muted);
+    font-size: 1rem;
+  }
+
+  .about-text p strong { color: var(--ink); font-weight: 600; }
+
+  .about-skills h3 {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+  }
+  .about-skills h3:first-child { margin-top: 0; }
+
+  .skill-list {
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+  }
+
+  /* ─── PROJECTS ─── */
+  #projects { background: #f0ece2; }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    padding: 2rem;
+    position: relative;
+    transition: transform 0.25s, box-shadow 0.25s;
+    overflow: hidden;
+  }
+  .project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+  }
+
+  .project-card.featured {
+    grid-column: span 2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 3px;
+    background: var(--rule);
+    transition: background 0.3s;
+  }
+  .project-card:hover::before { background: var(--accent); }
+
+  .project-number {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+
+  .project-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+  }
+
+  .project-desc {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 1.25rem;
+    line-height: 1.6;
+  }
+
+  .project-tags {
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+  }
+
+  .project-visual {
+    background: var(--ink);
+    border-radius: 4px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .mini-chart-row {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .mini-chart-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: rgba(255,255,255,0.5);
+    width: 80px;
+    flex-shrink: 0;
+  }
+
+  .mini-bar-bg {
+    flex: 1;
+    height: 8px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .mini-bar {
+    height: 100%;
+    border-radius: 2px;
+    animation: barGrow 1.2s ease both;
+    transform-origin: left;
+  }
+
+  @keyframes barGrow {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+
+  .mini-val {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    color: rgba(255,255,255,0.6);
+    width: 36px;
+    text-align: right;
+  }
+
+  /* ─── EXPERIENCE TIMELINE ─── */
+  #experience { background: var(--paper); }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 1px;
+    background: var(--rule);
+  }
+
+  .timeline-item {
+    position: relative;
+    padding: 0 0 2.5rem 2rem;
+    border-left: none;
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -5px; top: 6px;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--paper);
+    border: 2px solid var(--accent);
+  }
+
+  .timeline-item.current::before { background: var(--accent); }
+
+  .tl-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 0.4rem;
+  }
+
+  .tl-role {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-bottom: 0.2rem;
+  }
+
+  .tl-company {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent2);
+    margin-bottom: 0.75rem;
+  }
+
+  .tl-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .tl-bullets li {
+    font-size: 0.9rem;
+    color: var(--muted);
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  .tl-bullets li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 0.75rem;
+    top: 0.05rem;
+  }
+
+  /* ─── SKILLS ─── */
+  #skills { background: #f0ece2; }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .skill-card {
+    background: var(--card);
+    border: 1px solid var(--rule);
+    padding: 1.75rem;
+    transition: transform 0.2s;
+  }
+  .skill-card:hover { transform: translateY(-3px); }
+
+  .skill-card-icon {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
+
+  .skill-card-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+  }
+
+  .skill-card-list {
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  /* ─── CERTIFICATIONS ─── */
+  #certs { background: var(--paper); }
+
+  .certs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+
+  .cert-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.25rem;
+    border: 1px solid var(--rule);
+    background: var(--card);
+    transition: border-color 0.2s;
+  }
+  .cert-item:hover { border-color: var(--accent); }
+
+  .cert-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-top: 0.4rem;
+    flex-shrink: 0;
+  }
+
+  .cert-name {
+    font-size: 0.85rem;
+    font-weight: 500;
+    line-height: 1.4;
+    margin-bottom: 0.2rem;
+  }
+
+  .cert-issuer {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* ─── CONTACT / CTA ─── */
+  #contact {
+    background: var(--ink);
+    color: var(--paper);
+    text-align: center;
+    padding: 6rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #contact::before {
+    content: 'HIRE ME';
+    position: absolute;
+    font-family: 'DM Serif Display', serif;
+    font-size: 18vw;
+    color: rgba(255,255,255,0.03);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  #contact .section-label { color: var(--accent); justify-content: center; }
+  #contact .section-label::after { display: none; }
+  #contact .section-label::before { display: none; }
+
+  #contact .section-title { color: #fff; margin-bottom: 1rem; }
+
+  #contact p {
+    color: rgba(255,255,255,0.5);
+    max-width: 48ch;
+    margin: 0 auto 3rem;
+    font-size: 1rem;
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn.light {
+    border-color: rgba(255,255,255,0.3);
+    color: #fff;
+  }
+  .btn.light:hover { background: rgba(255,255,255,0.1); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: #080808;
+    color: rgba(255,255,255,0.3);
+    padding: 1.5rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    header, section, .stats-strip, footer { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .about-grid, .projects-grid, .skills-grid, .certs-grid, .stats-strip {
+      grid-template-columns: 1fr;
+    }
+    .project-card.featured { grid-column: auto; grid-template-columns: 1fr; }
+    .stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 1.5rem; }
+    .stat:last-child { border-bottom: none; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ─── HEADER / HERO ─── -->
+<header>
+  <nav class="nav-bar">
+    <span class="nav-logo">Benjamin Berkoe Agyemang — Portfolio</span>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="hero">
+    <p class="hero-eyebrow">Data Analyst · Reporting · Business Intelligence</p>
+    <h1>Turning messy data into <em>clear decisions</em></h1>
+    <p class="hero-desc">
+      Junior Data Analyst with 2+ years producing trusted management reports, SQL-driven dashboards, and BI visualizations — available for remote opportunities including marketing analytics at Marrina Decisions.
+    </p>
+    <div class="hero-tags">
+      <span class="tag accent">SQL — Oracle · SQL Server · Snowflake</span>
+      <span class="tag accent2">Power BI &amp; Tableau</span>
+      <span class="tag">Advanced Excel</span>
+      <span class="tag">ETL Pipelines</span>
+      <span class="tag">Azure &amp; AWS</span>
+      <span class="tag">Remote ✓</span>
+    </div>
+    <div class="hero-cta">
+      <a href="mailto:benbkind@gmail.com" class="btn primary">↗ Get In Touch</a>
+      <a href="#projects" class="btn">View Projects</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span class="scroll-line"></span>
+    Scroll to explore
+  </div>
+</header>
+
+<!-- ─── STATS STRIP ─── -->
+<div class="stats-strip">
+  <div class="stat">
+    <span class="stat-number">2+</span>
+    <span class="stat-label">Years Analyst Experience</span>
+  </div>
+  <div class="stat">
+    <span class="stat-number">25%</span>
+    <span class="stat-label">Reporting Accuracy Improvement</span>
+  </div>
+  <div class="stat">
+    <span class="stat-number">7+</span>
+    <span class="stat-label">Years Total Professional</span>
+  </div>
+  <div class="stat">
+    <span class="stat-number">5</span>
+    <span class="stat-label">Active Certifications</span>
+  </div>
+</div>
+
+<!-- ─── ABOUT ─── -->
+<section id="about">
+  <p class="section-label">01 — About</p>
+  <h2 class="section-title">Analyst. Storyteller.<br>Problem-solver.</h2>
+  <div class="about-grid">
+    <div class="about-text fade-in">
+      <p>
+        I'm <strong>Benjamin Berkoe Agyemang</strong>, a Junior Data Analyst based in Tiffin, OH, with 2+ years producing daily, weekly, and monthly management reports for enterprise and financial-services clients — and 7+ years of total professional experience spanning data, technical analysis, and customer operations.
+      </p>
+      <p>
+        My work sits at the intersection of <strong>technical depth and business communication</strong>. I write complex SQL, build Power BI and Tableau dashboards, and implement data-quality frameworks — then translate the findings into clear language that business stakeholders actually use to make decisions.
+      </p>
+      <p>
+        Currently working full-time at <strong>American Contract Systems</strong> (Tiffin, OH) while previously completing a part-time contract engagement with K&T Ventures. I hold certifications in Microsoft Power BI, Google Data Analytics, Azure Fundamentals, and AWS Cloud Practitioner.
+      </p>
+      <p>
+        Open to fully remote roles where reporting accuracy, clean data, and collaborative analysis create real business impact.
+      </p>
+      <div style="margin-top:1.5rem;">
+        <a href="mailto:benbkind@gmail.com" class="btn">↗ benbkind@gmail.com</a>
+      </div>
+    </div>
+    <div class="about-skills fade-in">
+      <h3>Core Languages &amp; Databases</h3>
+      <div class="skill-list">
+        <span class="tag">T-SQL / SQL Server</span>
+        <span class="tag">Oracle SQL</span>
+        <span class="tag">Snowflake</span>
+        <span class="tag">PostgreSQL</span>
+        <span class="tag">Python (supporting)</span>
+      </div>
+      <h3>Visualization &amp; BI</h3>
+      <div class="skill-list">
+        <span class="tag">Power BI</span>
+        <span class="tag">Tableau</span>
+        <span class="tag">SSRS</span>
+        <span class="tag">Excel Pivot Tables</span>
+        <span class="tag">VLOOKUP / Charts</span>
+      </div>
+      <h3>Cloud &amp; ETL</h3>
+      <div class="skill-list">
+        <span class="tag">Azure Data Factory</span>
+        <span class="tag">SSIS</span>
+        <span class="tag">Informatica</span>
+        <span class="tag">AWS</span>
+        <span class="tag">Amazon S3</span>
+      </div>
+      <h3>Process &amp; Workflow</h3>
+      <div class="skill-list">
+        <span class="tag">UAT &amp; Reconciliation</span>
+        <span class="tag">Requirements Gathering</span>
+        <span class="tag">Business-to-System Analysis</span>
+        <span class="tag">ServiceNow</span>
+        <span class="tag">Jira</span>
+        <span class="tag">SharePoint</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROJECTS ─── -->
+<section id="projects">
+  <p class="section-label">02 — Projects</p>
+  <h2 class="section-title">Work that shows<br>what I can do</h2>
+
+  <div class="projects-grid">
+
+    <!-- FEATURED PROJECT -->
+    <div class="project-card featured fade-in">
+      <div>
+        <p class="project-number">Project 01 — Featured</p>
+        <h3 class="project-title">ERP to Cloud Data Warehouse Migration (Compass Group)</h3>
+        <p class="project-desc">
+          Migrated customer and financial data from a legacy ERP system into Snowflake using Azure Data Factory. Applied SQL-based ETL transformations with multi-stage data quality checkpoints, metadata validation, and lineage tracking. Delivered role-based Power BI reporting dashboards for compliance and operational performance tracking.
+        </p>
+        <p class="project-desc">
+          <strong>Outcome:</strong> Clean, audit-ready data warehouse with governed access tiers; zero data loss; reporting cycle time reduced significantly for compliance-sensitive stakeholders.
+        </p>
+        <div class="project-tags">
+          <span class="tag accent">Snowflake</span>
+          <span class="tag">Azure Data Factory</span>
+          <span class="tag">SQL ETL</span>
+          <span class="tag">Power BI</span>
+          <span class="tag">Data Quality</span>
+          <span class="tag">Compliance Reporting</span>
+        </div>
+      </div>
+      <div class="project-visual">
+        <p style="font-family:'DM Mono',monospace;font-size:0.6rem;color:rgba(255,255,255,0.4);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.5rem;">Migration Quality Metrics</p>
+        <div class="mini-chart-row">
+          <span class="mini-chart-label">Data Accuracy</span>
+          <div class="mini-bar-bg"><div class="mini-bar" style="width:98%;background:#c0392b;"></div></div>
+          <span class="mini-val">98%</span>
+        </div>
+        <div class="mini-chart-row">
+          <span class="mini-chart-label">Records Migrated</span>
+          <div class="mini-bar-bg"><div class="mini-bar" style="width:100%;background:#1a5276;" style="animation-delay:0.1s"></div></div>
+          <span class="mini-val">100%</span>
+        </div>
+        <div class="mini-chart-row">
+          <span class="mini-chart-label">Validation Pass</span>
+          <div class="mini-bar-bg"><div class="mini-bar" style="width:95%;background:#c0392b;"></div></div>
+          <span class="mini-val">95%</span>
+        </div>
+        <div class="mini-chart-row">
+          <span class="mini-chart-label">QC Checks</span>
+          <div class="mini-bar-bg"><div class="mini-bar" style="width:88%;background:#1a5276;"></div></div>
+          <span class="mini-val">88%</span>
+        </div>
+        <p style="font-family:'DM Mono',monospace;font-size:0.6rem;color:rgba(255,255,255,0.4);letter-spacing:0.12em;text-transform:uppercase;margin-top:1.25rem;margin-bottom:0.5rem;">Stack Used</p>
+        <div style="display:flex;flex-wrap:wrap;gap:0.4rem;">
+          <span style="font-family:'DM Mono',monospace;font-size:0.6rem;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);padding:0.2rem 0.6rem;border-radius:2px;">Snowflake</span>
+          <span style="font-family:'DM Mono',monospace;font-size:0.6rem;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);padding:0.2rem 0.6rem;border-radius:2px;">ADF</span>
+          <span style="font-family:'DM Mono',monospace;font-size:0.6rem;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);padding:0.2rem 0.6rem;border-radius:2px;">T-SQL</span>
+          <span style="font-family:'DM Mono',monospace;font-size:0.6rem;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.7);padding:0.2rem 0.6rem;border-radius:2px;">Power BI</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROJECT 02 -->
+    <div class="project-card fade-in">
+      <p class="project-number">Project 02</p>
+      <h3 class="project-title">Management Reporting Accuracy Framework</h3>
+      <p class="project-desc">
+        Designed and implemented data quality checks and validation frameworks at American Contract Systems that reduced reporting errors across Oracle and Snowflake reporting pipelines. Result: 25% improvement in reporting accuracy and measurably increased stakeholder trust in data outputs.
+      </p>
+      <div class="project-tags">
+        <span class="tag">Oracle SQL</span>
+        <span class="tag">Snowflake</span>
+        <span class="tag">Data Validation</span>
+        <span class="tag">Power BI</span>
+        <span class="tag accent">25% Accuracy Gain</span>
+      </div>
+    </div>
+
+    <!-- PROJECT 03 -->
+    <div class="project-card fade-in">
+      <p class="project-number">Project 03</p>
+      <h3 class="project-title">KPI Dashboard Suite — Real-Time Reporting</h3>
+      <p class="project-desc">
+        Built and maintained a suite of Power BI and Tableau dashboards for business leaders to monitor operational and financial KPIs in near real-time. Developed complex stored procedures and data models in Snowflake to power high-refresh analytical layers.
+      </p>
+      <div class="project-tags">
+        <span class="tag">Power BI</span>
+        <span class="tag">Tableau</span>
+        <span class="tag">Snowflake</span>
+        <span class="tag">Stored Procedures</span>
+        <span class="tag">Near Real-Time</span>
+      </div>
+    </div>
+
+    <!-- PROJECT 04 -->
+    <div class="project-card fade-in">
+      <p class="project-number">Project 04</p>
+      <h3 class="project-title">ERP Data Ingestion Pipeline (Amazon — Solutia)</h3>
+      <p class="project-desc">
+        Built and maintained data ingestion and transformation pipelines moving high-volume ERP data into a centralized enterprise data warehouse for a Fortune 100 client. Established data governance practices including validation rules, audits, and compliance checks.
+      </p>
+      <div class="project-tags">
+        <span class="tag">Oracle SQL</span>
+        <span class="tag">SSIS</span>
+        <span class="tag">Amazon S3</span>
+        <span class="tag">Data Governance</span>
+        <span class="tag">UAT</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── EXPERIENCE ─── -->
+<section id="experience">
+  <p class="section-label">03 — Experience</p>
+  <h2 class="section-title">Where I've worked<br>&amp; what I built</h2>
+
+  <div class="timeline">
+
+    <div class="timeline-item current fade-in">
+      <p class="tl-date">Mar 2025 – Mar 2026 · Full-time</p>
+      <h3 class="tl-role">Junior Data Analyst</h3>
+      <p class="tl-company">American Contract Systems · Tiffin, OH</p>
+      <ul class="tl-bullets">
+        <li>Created and maintained management reports supporting business operations — validating accuracy and ensuring timely distribution</li>
+        <li>Developed and optimized complex SQL queries and stored procedures in Oracle and Snowflake</li>
+        <li>Designed Power BI and Tableau dashboards, enabling near real-time KPI monitoring</li>
+        <li>Implemented data quality checks improving reporting accuracy by 25%</li>
+        <li>Partnered with cross-functional teams during UAT and data reconciliation cycles</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item fade-in">
+      <p class="tl-date">Jan 2025 – Sep 2025 · Contract (20 hrs/week, evenings &amp; weekends)</p>
+      <h3 class="tl-role">Data Professional</h3>
+      <p class="tl-company">K&amp;T Ventures · Remote</p>
+      <ul class="tl-bullets">
+        <li>Created, validated, and distributed daily, weekly, and monthly management reports to clients</li>
+        <li>Performed business-to-system analysis, transforming client needs into functional requirements</li>
+        <li>Documented business requirements including process flows, data flows, and reporting specs</li>
+        <li>Designed scalable data pipelines in Snowflake and Azure for analytical reporting</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item fade-in">
+      <p class="tl-date">Jul 2021 – Aug 2024</p>
+      <h3 class="tl-role">Senior Associate, Tech Support – Network Operations</h3>
+      <p class="tl-company">AT&amp;T Global Network Services · Czech Republic</p>
+      <ul class="tl-bullets">
+        <li>Performed root-cause troubleshooting of complex system and reporting issues</li>
+        <li>Defined business requirements and prepared plans aligned with SDLC</li>
+        <li>Led technical projects and trained end-user communities on systems</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item fade-in">
+      <p class="tl-date">Jan 2018 – May 2019</p>
+      <h3 class="tl-role">Data Analyst</h3>
+      <p class="tl-company">Solutia Consulting (Amazon) · Minnesota City, MN</p>
+      <ul class="tl-bullets">
+        <li>Built data ingestion pipelines moving high-volume ERP data into enterprise warehouses</li>
+        <li>Crafted SQL logic and stored procedures for management reporting at Fortune 100 scale</li>
+        <li>Delivered Power BI dashboards and led UAT data validation cycles</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── SKILLS ─── -->
+<section id="skills">
+  <p class="section-label">04 — Skills</p>
+  <h2 class="section-title">The full toolkit</h2>
+
+  <div class="skills-grid">
+    <div class="skill-card fade-in">
+      <div class="skill-card-icon">🗄️</div>
+      <h3 class="skill-card-title">Databases &amp; SQL</h3>
+      <div class="skill-card-list">
+        SQL Server (T-SQL) · Oracle SQL · Snowflake · PostgreSQL<br>
+        Complex queries · Stored procedures · Data modeling · Performance tuning
+      </div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-card-icon">📊</div>
+      <h3 class="skill-card-title">Data Visualization</h3>
+      <div class="skill-card-list">
+        Power BI · Tableau · SSRS<br>
+        Dashboard design · KPI reporting · Ad-hoc reports · Automated distributions
+      </div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-card-icon">📋</div>
+      <h3 class="skill-card-title">Advanced Excel</h3>
+      <div class="skill-card-list">
+        Pivot Tables · VLOOKUP · Charts<br>
+        Conditional formatting · Data validation · Complex formulas
+      </div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-card-icon">☁️</div>
+      <h3 class="skill-card-title">Cloud &amp; ETL</h3>
+      <div class="skill-card-list">
+        Azure Data Factory · SSIS · Informatica<br>
+        Azure · AWS · Snowflake · Amazon S3
+      </div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-card-icon">🔍</div>
+      <h3 class="skill-card-title">Business Analysis</h3>
+      <div class="skill-card-list">
+        Requirements gathering · Business-to-system analysis · UAT<br>
+        Impact analysis · Process documentation · Stakeholder communication
+      </div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-card-icon">🛠️</div>
+      <h3 class="skill-card-title">Tools &amp; Workflow</h3>
+      <div class="skill-card-list">
+        ServiceNow · Jira · Git · SharePoint<br>
+        Python (supporting) · SDLC · Agile/project-based environments
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CERTIFICATIONS ─── -->
+<section id="certs">
+  <p class="section-label">05 — Certifications</p>
+  <h2 class="section-title">Verified credentials</h2>
+  <div class="certs-grid">
+    <div class="cert-item fade-in">
+      <div class="cert-dot"></div>
+      <div>
+        <div class="cert-name">Microsoft Power BI Data Analyst Professional Certificate</div>
+        <div class="cert-issuer">Coursera / Microsoft</div>
+      </div>
+    </div>
+    <div class="cert-item fade-in">
+      <div class="cert-dot"></div>
+      <div>
+        <div class="cert-name">Google Data Analytics Professional Certificate</div>
+        <div class="cert-issuer">Coursera / Google</div>
+      </div>
+    </div>
+    <div class="cert-item fade-in">
+      <div class="cert-dot"></div>
+      <div>
+        <div class="cert-name">Microsoft Certified: Azure Fundamentals</div>
+        <div class="cert-issuer">Microsoft · 2022</div>
+      </div>
+    </div>
+    <div class="cert-item fade-in">
+      <div class="cert-dot"></div>
+      <div>
+        <div class="cert-name">AWS Certified Cloud Practitioner</div>
+        <div class="cert-issuer">Amazon Web Services · 2022</div>
+      </div>
+    </div>
+    <div class="cert-item fade-in">
+      <div class="cert-dot"></div>
+      <div>
+        <div class="cert-name">ITIL Foundation Certification</div>
+        <div class="cert-issuer">Axelos</div>
+      </div>
+    </div>
+    <div class="cert-item fade-in">
+      <div class="cert-dot"></div>
+      <div>
+        <div class="cert-name">Google Cybersecurity Certificate</div>
+        <div class="cert-issuer">Coursera / Google · 2023</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACT ─── -->
+<section id="contact">
+  <p class="section-label">06 — Contact</p>
+  <h2 class="section-title">Ready to contribute.<br>Ready to start.</h2>
+  <p>
+    I'm actively applying for remote data analyst roles. Fully equipped home office, high-speed internet, and a track record of delivering clean, timely analysis independently.
+  </p>
+  <div class="contact-links">
+    <a href="mailto:benbkind@gmail.com" class="btn primary">↗ benbkind@gmail.com</a>
+    <a href="tel:+15677602158" class="btn light">+1 (567) 760-2158</a>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <span>© 2026 Benjamin Berkoe Agyemang</span>
+  <span>Data Analyst · Tiffin, OH · Open to Remote</span>
+</footer>
+
+<script>
+  // Intersection observer for fade-in animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        entry.target.style.transitionDelay = `${i * 0.07}s`;
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
